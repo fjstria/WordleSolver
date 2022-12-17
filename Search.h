@@ -1,37 +1,21 @@
-/*
- * FJ Tria
- * Search.h
- * Header file for the search utility used in Wordle Solver.
- */
-
 #pragma once
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <string.h>
 
-int score_letter(char letter, char **word_bank, int word_count);
-// Generates a score for an individual letter.
+#include <stdlib.h>
+#include <stdio.h>
+
+int score_letter(char letter, char **vocabulary, size_t num_words);
 
 int score_word(char *word, int *letter_scores);
-// Generates a score for a word by summing the scores of each individual letter.
-// Repeat letters add to score only once.
 
-char *get_guess(char **word_bank, int word_count);
-// Generates the best possible guess by selecting the word from the word bank that
-// has the highest score.
+char *get_guess(char **vocabulary, size_t num_words);
 
-int filter_gray(char letter, char **word_bank, int word_count);
-// Removes words that contain the letter from the word bank. The slot that removed
-// words reside in is set to NULL.
+size_t filter_vocabulary_gray(char letter, char **vocabulary,
+                              size_t num_words);
 
-int filter_yellow(char letter, int position, char **word_bank, int word_count);
-// Removes words that contain the letter in a given position. The slot that
-// removed words reside in is set to NULL.
+size_t filter_vocabulary_yellow(char letter, int position, char **vocabulary,
+                                size_t num_words);
 
-int filter_green(char letter, int position, char **word_bank, int word_count);
-// Removes words that do not contain the letter in a given position. The slot that
-// removed words reside in is set to NULL.
+size_t filter_vocabulary_green(char letter, int position, char **vocabulary,
+                               size_t num_words);
 
-void free_word_bank(char **word_bank, int word_count);
-// Frees the memory allocated to the word bank.
+void free_vocabulary(char **vocabulary, size_t num_words);
