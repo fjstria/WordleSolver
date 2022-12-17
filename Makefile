@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wpedantic -Werror -Wextra -g -O0
 all: Solver
 
 Solver: Search.o Solver.o
-	$(CC) Search.o Solver.o -o solver
+	$(CC) Search.o Solver.o -o Solver
 
 Search.o: Search.c
 	$(CC) $(CFLAGS) -c Search.c
