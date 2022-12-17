@@ -1,7 +1,27 @@
-*ftria@ucsc.edu*
+## Files in this Directory
+* `Makefile` - Type `make` to build the program.
+* `README.md` - This README.
+* `Search.c` - Implementation of the search utility.
+* `Search.h` - Header file for the search utility. Contains function prototypes.
+* `Solver.c` - Implementation of the Wordle Solver.
+* `vocabulary.txt` - Text file containing all possible Wordle answers.
 
-# Implementation
-## score_letter
+## Details and Usage
+This project was adapted from an assignment given in CSE 13S (Computer Systems and C
+Programming) at UC Santa Cruz. This is a rudimentary solver, programmed in C, for the online
+word game *Wordle*.
+
+While in the WordleSolver directory within the terminal, type `make`. Then run the program by
+typing `./Solver`. The program will prompt you with a first guess to use. Use the feedback
+provided by Wordle to tell the program the results of each guess by typing a 5-letter string
+containing the letters 'x' (gray), 'y' (yellow), and/or 'g' (green). The program will continue
+to provide optimized guesses until provided with the string 'ggggg'.
+
+## The Search Utility
+Below are details about the implementation of the search utility (`Search.c`) that were
+included in the original submission of this project.
+
+### score_letter
 This function will count the amount of words that contain a certain letter in any place. An
 int `score` will keep track of this number.
 
@@ -16,7 +36,7 @@ at, is equivalent to `letter`, `score` will be incremented and the inner for loo
 At the end of both for loops, the function will return `score`.
 
 
-## score_word
+### score_word
 This function will sum up the score of each unique letter in a given word. An int `score`
 will keep track of the sum and a char array `letters_used` will keep track of the letters
 that have already contributed to the sum.
@@ -34,7 +54,7 @@ accessing the `letter_scores` index number given by subtracting `'a'` from the l
 added onto `score`. At the end of the function, it returns `score`.
 
 
-## filter_vocabulary_gray
+### filter_vocabulary_gray
 This function will filter words that contain a certain letter within them and return the
 number of words that have been filtered. A size_t `count` will keep track of the number of
 words filtered.
@@ -50,7 +70,7 @@ be set to `NULL`. Count will be incremented by 1 and the inner for loop will `br
 
 At the end of all loops, the function will return `count`.
 
-## filter_vocabulary_yellow
+### filter_vocabulary_yellow
 This function will filter words that have a letter in a certain position or do not have that
 letter present in them at all and return the number of words that have been filtered. A
 size_t `count` will keep track of the number of words filtered.
@@ -76,7 +96,7 @@ loop will `break`.
 At the end of the function, `count` will be returned.
 
 
-## filter_vocabulary_green
+### filter_vocabulary_green
 This function will filter words that do not contain a specified letter at a specified
 position and return the number of words that have been filtered. A size_t `count` will keep
 track of the number of words filtered.
