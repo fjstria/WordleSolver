@@ -1,28 +1,17 @@
-// Runs the wordle solver -- you can either specify a word for it to search
-// towards, like this:
-// $ ./solver <secret word>
-//
-// Or if you don't specify a secret word, then it will supply you with guesses
-// and ask for the feedback from a different instance of wordle.
+/*
+ * FJ Tria
+ * Solver.c
+ * Implementation of the Wordle Solver.
+ * 
+ * You can either specify a word for it to search towards, like this:
+ * $ ./solver <word>
+ *
+ * Or the solver will supply you with guesses and ask for the feedback from a
+ * different instance of wordle.
+ */
 
-#include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
+#include "Search.h"
 
-#include "search_util.h"
-
-// Returns true if the guess is an exact match with the secret word, but
-// more importantly, fills in the result with the following:
-// - 'x' goes in a slot if the corresponding letter in the guess does not appear
-//   anywhere in the secret word
-// - 'y' goes in a slot if the corresponding letter in the guess appears in the
-//   secret word, but not in the corresponding slot
-// - 'g' goes in a slot if the corresponding letter in the guess appears in the
-//   corresponding slot in the secret word.
-//   You can assume that result points at enough memory for a string of length
-//   5. (ie, at least 6 bytes long)
 bool score_guess(char *secret, char *guess, char *result) {
   for (int i = 0; i < 5; i++) {
     result[i] = 'x';
@@ -44,20 +33,7 @@ bool score_guess(char *secret, char *guess, char *result) {
   return strncmp(secret, guess, 5) == 0;
 }
 
-// Returns an array of strings (so, char **), where each string contains a word
-// from the specified file. The file is assumed to contain 5-letter words, one
-// per line.
-// Also, this function sets the value pointed at by *num_words to be the number
-// of words read.
-// This will need to allocate enough memory to hold all of the char* pointers --
-// so you will keep track of the size of your char** array and then use realloc
-// to make the array larger over time, so that you have enough space for the
-// dynamically-growing array of char *.
-// Use fopen to open the input file for reading,
-// strdup (or strndup) to make copies of each word read from that file, and
-// fclose to close the file when you are done reading from it.
-// Each element of the array should be a single five-letter word,
-// null-terminated.
+
 char **load_vocabulary(char *filename, size_t *num_words) {
   char **out = NULL;
   size_t n = 0;
