@@ -81,7 +81,7 @@ int main(int argc, char **argv) {
       break;
     }
     num_guesses++;
-    printf("GUESS #%d: %s\n", num_guesses, guess);
+    printf("\nGUESS #%d: %s\n", num_guesses, guess);
 
     if (secret != NULL) {
       success = score_guess(secret, guess, result);
@@ -89,7 +89,7 @@ int main(int argc, char **argv) {
       bool sensible_result = false;
 
       while (!sensible_result) {
-        printf("please enter result as 5 characters (g,y,x): ");
+        printf("\nplease enter result as 5 characters (g,y,x): ");
         fgets(result, 10, stdin);
         result[5] = '\0';
         sensible_result = true;
