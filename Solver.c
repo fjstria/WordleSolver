@@ -77,7 +77,7 @@ int main(int argc, char **argv) {
     guess = get_guess(vocabulary, num_words);
 
     if (guess == NULL) {
-      printf("ran out of ideas?\n");
+      printf("\nRan out of ideas.\n");
       break;
     }
     num_guesses++;
@@ -89,7 +89,7 @@ int main(int argc, char **argv) {
       bool sensible_result = false;
 
       while (!sensible_result) {
-        printf("\nplease enter result as 5 characters (g,y,x): ");
+        printf("\nPlease enter result as 5 characters (g,y,x): ");
         fgets(result, 10, stdin);
         result[5] = '\0';
         sensible_result = true;
@@ -103,14 +103,8 @@ int main(int argc, char **argv) {
     }
 
     if (!success) {
-      // If we didn't get it right, filter down the vocabulary!
       for (int i = 0; i < 5; i++) {
         if (result[i] == 'x') {
-          // only remove words containing this letter if it doesn't occur
-          // elsewhere in the word -- ie, you might have guessed the letter
-          // twice, but it only occurs once. bit of a weird edge case, but this
-          // can happen. This handles the behavior or the official wordle, which
-          // marks letters as gray if you guess them twice but they occur once.
           char letter = guess[i];
           bool non_gray_elsewhere = false;
           for (int j = 0; j < 5; j++) {
@@ -120,28 +114,28 @@ int main(int argc, char **argv) {
             }
           }
           if (!non_gray_elsewhere) {
-            printf("filtering with gray letter: %c\n", guess[i]);
+            printf("Filtering with gray letter: %c\n", guess[i]);
             removed = filter_vocabulary_gray(guess[i], vocabulary, num_words);
-            printf("removed %lu words.\n", removed);
+            printf("Removed %lu words.\n", removed);
           }
         } else if (result[i] == 'y') {
-          printf("filtering with yellow letter: %c\n", guess[i]);
+          printf("Filtering with yellow letter: %c\n", guess[i]);
           removed =
               filter_vocabulary_yellow(guess[i], i, vocabulary, num_words);
-          printf("removed %lu words.\n", removed);
+          printf("Removed %lu words.\n", removed);
         } else if (result[i] == 'g') {
-          printf("filtering with green letter: %c\n", guess[i]);
+          printf("Filtering with green letter: %c\n", guess[i]);
           removed = filter_vocabulary_green(guess[i], i, vocabulary, num_words);
-          printf("removed %lu words.\n", removed);
+          printf("Removed %lu words.\n", removed);
         }
       }
     }
   } while (!success);
 
   if (success) {
-    printf("correct! got it in %d guesses!\n", num_guesses);
+    printf("Correct! You got it in %d guesses!\n", num_guesses);
   } else {
-    printf("oh no, could not guess it -- maybe outside the vocabulary?\n");
+    printf("No potential guesses found.\n");
   }
 
   free(guess);
