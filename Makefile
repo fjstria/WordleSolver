@@ -3,25 +3,19 @@ CC = clang
 CFLAGS = -Wall -Wpedantic -Werror -Wextra -g -O0
 
 
-all: solver demo_functions
+all: Solver
 
-solver: search_util.o solver.o
-	$(CC) search_util.o solver.o -o solver
+Solver: Search.o Solver.o
+	$(CC) Search.o Solver.o -o solver
 
-demo_functions: search_util.o demo_functions.o
-	$(CC) search_util.o demo_functions.o -o demo_functions
+Search.o: Search.c
+	$(CC) $(CFLAGS) -c Search.c
 
-demo_functions.o: demo_functions.c
-	$(CC) $(CFLAGS) -c demo_functions.c
-
-search_util.o: search_util.c
-	$(CC) $(CFLAGS) -c search_util.c
-
-solver.o: solver.c
-	$(CC) $(CFLAGS) -c solver.c
+Solver.o: Solver.c
+	$(CC) $(CFLAGS) -c Solver.c
 
 clean:
-	rm -f search_util.o solver.o demo_functions.o solver demo_functions
+	rm -f Search.o Solver.o Solver
 
 format:
 	clang-format -i -style=file *.[ch]
