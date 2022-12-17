@@ -1,10 +1,10 @@
-#include "search_util.h"
+/*
+ * FJ Tria
+ * Search.c
+ * Implementation of search utility used by Solver
+ */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <stdbool.h>
-#include <string.h>
-
+#include "Search.h"
 
 int score_letter(char letter, char **vocabulary, size_t num_words) {
   int score = 0;
