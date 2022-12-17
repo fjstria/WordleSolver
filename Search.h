@@ -1,3 +1,9 @@
+/*
+ * FJ Tria
+ * Search.h
+ * Header file for search utility. 
+ */
+
 #pragma once
 
 #include <stdio.h>

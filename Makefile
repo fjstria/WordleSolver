@@ -1,3 +1,6 @@
+# FJ Tria
+# Makefile (WordleSolver)
+
 CC = clang
 
 CFLAGS = -Wall -Wpedantic -Werror -Wextra -g -O0
